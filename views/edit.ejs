@@ -1,0 +1,18 @@
+<h1>Editar tema</h1>
+
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px;">
+  <form action="/topics/<%= topic.id %>?_method=PUT" method="POST">
+
+    <label>Título</label>
+    <input type="text" name="title" value="<%= topic.title %>" required>
+
+    <label>Descripción</label>
+    <textarea name="description" rows="4" required><%= topic.description %></textarea>
+
+    <div style="display: flex; gap: 12px; margin-top: 8px;">
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      <a href="/" class="btn btn-secondary">Cancelar</a>
+    </div>
+
+  </form>
+</div>

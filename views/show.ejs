@@ -1,0 +1,80 @@
+<a href="/" class="btn btn-secondary" style="display: inline-block; margin-bottom: 16px;">← Volver</a>
+
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+  
+  <h1 style="margin: 0 0 8px;"><%= topic.title %></h1>
+  <p style="color: #666; margin: 0 0 16px;"><%= topic.description %></p>
+
+  <div style="display: flex; align-items: center; gap: 12px;">
+    
+    <button 
+      class="btn btn-vote vote-btn" 
+      data-id="<%= topic.id %>" 
+      data-type="topic">
+      👍 Votar
+    </button>
+
+    <span id="votes-topic-<%= topic.id %>">
+      <%= topic.votes %> votos
+    </span>
+
+    <a href="/topics/<%= topic.id %>/edit" class="btn btn-secondary">Editar</a>
+
+    <form action="/topics/<%= topic.id %>?_method=DELETE" method="POST" style="margin: 0;">
+      <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+
+  </div>
+</div>
+
+<h2>Enlaces</h2>
+
+<% if (topic.links.length === 0) { %>
+  <p style="color: #666;">No hay enlaces todavía. Agregá el primero abajo.</p>
+<% } %>
+
+<% topic.links.forEach(link => { %>
+  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+    
+    <a href="<%= link.url %>" target="_blank" style="font-weight: bold; color: #0066cc;">
+      <%= link.description %>
+    </a>
+    <p style="color: #888; font-size: 13px; margin: 4px 0 12px;"><%= link.url %></p>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      
+      <button 
+        class="btn btn-vote vote-btn" 
+        data-id="<%= topic.id %>" 
+        data-link-id="<%= link.id %>" 
+        data-type="link">
+        👍 Votar
+      </button>
+
+      <span id="votes-link-<%= link.id %>">
+        <%= link.votes %> votos
+      </span>
+
+      <form action="/topics/<%= topic.id %>/links/<%= link.id %>?_method=DELETE" method="POST" style="margin: 0;">
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+      </form>
+
+    </div>
+  </div>
+<% }) %>
+
+<h2 style="margin-top: 24px;">Agregar enlace</h2>
+
+<div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px;">
+  <form action="/topics/<%= topic.id %>/links" method="POST">
+    
+    <label>URL</label>
+    <input type="url" name="url" placeholder="https://ejemplo.com" required>
+
+    <label>Descripción</label>
+    <input type="text" name="description" placeholder="¿De qué trata este enlace?" required>
+
+    <button type="submit" class="btn btn-primary">Agregar enlace</button>
+
+  </form>
+</div>

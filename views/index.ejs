@@ -1,0 +1,39 @@
+<h1>Temas de aprendizaje</h1>
+
+<% if (topics.length === 0) { %>
+  <p>No hay temas todavía. <a href="/topics/new">Creá el primero</a>.</p>
+<% } %>
+
+<% topics.forEach(topic => { %>
+  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+    
+    <h2 style="margin: 0 0 8px;">
+      <a href="/topics/<%= topic.id %>" style="text-decoration: none; color: #333;">
+        <%= topic.title %>
+      </a>
+    </h2>
+
+    <p style="color: #666; margin: 0 0 12px;"><%= topic.description %></p>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      
+      <button 
+        class="btn btn-vote vote-btn" 
+        data-id="<%= topic.id %>" 
+        data-type="topic">
+        👍 Votar
+      </button>
+
+      <span id="votes-topic-<%= topic.id %>">
+        <%= topic.votes %> votos
+      </span>
+
+      <a href="/topics/<%= topic.id %>/edit" class="btn btn-secondary">Editar</a>
+
+      <form action="/topics/<%= topic.id %>?_method=DELETE" method="POST" style="margin: 0;">
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+      </form>
+
+    </div>
+  </div>
+<% }) %>

@@ -1,0 +1,27 @@
+{
+  "name": "th_challenge_8",
+  "version": "1.0.0",
+  "description": "Imagínate esto: acabas de ser contratado por Learn It, Love It Inc., una plataforma educativa en ascenso. Quieren una aplicación donde los usuarios puedan agregar, actualizar y eliminar temas de aprendizaje, como \"Cómo programar como un ninja\" o \"Dominar el arte de preparar café\". Pero hay un giro: los usuarios deberían poder votar a favor de los temas y enlaces que encuentren más útiles, y la aplicación debería reordenar dinámicamente el contenido según los votos. Ah, y ¿mencionamos? Harás todo con Node.js, Express, un motor de plantillas, y JavaScript puro. Sin presión.\r Antes de comenzar: Conceptos para repasar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juan84123/TH_Challenge_8.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/juan84123/TH_Challenge_8/issues"
+  },
+  "homepage": "https://github.com/juan84123/TH_Challenge_8#readme",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "method-override": "^3.0.0"
+  }
+}
