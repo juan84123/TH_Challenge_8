@@ -97,3 +97,40 @@ Consideraciones para el ejercicio
     Implementa interacciones del lado del cliente usando JavaScript puro.
     Añade lógica para manejar clics en botones de votación y actualizaciones en la interfaz Asegurate que todo funcione correctamente
     Optimiza el programa
+
+
+
+Navegador
+   ↓ solicitud HTTP
+topicRoutes      → "esta URL le corresponde a este controlador"
+   ↓
+topicController  → "necesito datos, le pido al modelo"
+   ↓
+topicModel       → "leo el JSON y devuelvo los datos"
+   ↓
+topicController  → "tengo los datos, los mando a la vista"
+   ↓
+views/*.ejs      → "genero el HTML con los datos"
+   ↓
+Navegador        → ve la página
+
+
+Usuario entra a http://localhost:3000
+        ↓
+topicRoutes recibe GET /
+        ↓
+llama a topicController.index
+        ↓
+el controlador pide datos al modelo
+        ↓
+res.render('index', { topics })
+        ↓
+Express busca views/index.ejs
+        ↓
+EJS procesa el archivo — reemplaza <%= %> con datos reales
+        ↓
+genera HTML puro
+        ↓
+ese HTML viaja al navegador
+        ↓
+el usuario ve la página

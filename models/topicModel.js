@@ -1,4 +1,11 @@
+// fs (File System) es un módulo nativo de Node.js — no necesita instalarse
+// Nos permite leer y escribir archivos en el disco
+// Lo usamos para leer y guardar el archivo topics.json
 const fs = require('fs')
+
+// path es otro módulo nativo de Node.js
+// Nos permite construir rutas de archivos sin preocuparnos por / o \ según el sistema operativo
+// En Windows las rutas usan \ pero en Linux/Mac usan / — path lo maneja automáticamente
 const path = require('path')
 
 const filePath = path.join(__dirname, '../data/topics.json')
@@ -100,14 +107,19 @@ function voteLink(id, linkId) {
   return topics[topicIndex].links[linkIndex]
 }
 
+// Exportamos todas las funciones del modelo para que el controlador pueda usarlas
+// A diferencia de module.exports = router (que exporta una sola cosa),
+// acá exportamos un objeto con múltiples funciones
+// El controlador las importa así: const topicModel = require('../models/topicModel')
+// Y las usa así: topicModel.getAll(), topicModel.create(), etc.
 module.exports = {
-  getAll,
-  getById,
-  create,
-  update,
-  remove,
-  vote,
-  addLink,
-  removeLink,
-  voteLink
+  getAll,      // devuelve todos los temas ordenados por votos
+  getById,     // devuelve un tema por su id
+  create,      // crea un tema nuevo
+  update,      // actualiza título y descripción de un tema
+  remove,      // elimina un tema
+  vote,        // incrementa el voto de un tema
+  addLink,     // agrega un enlace a un tema
+  removeLink,  // elimina un enlace de un tema
+  voteLink     // incrementa el voto de un enlace
 }
