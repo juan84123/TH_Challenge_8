@@ -10,7 +10,7 @@ Entorno de ejecución que permite usar JavaScript fuera del navegador — en el 
 Framework que corre sobre Node.js y simplifica la creación de servidores web. Permite definir rutas, manejar solicitudes HTTP y configurar middlewares con pocas líneas de código.
 
 ### EJS (Embedded JavaScript)
-Motor de plantillas que permite mezclar HTML con datos del servidor usando etiquetas especiales (`<%= %>`, `<% %>`). El servidor procesa el archivo EJS, inserta los datos y envía HTML puro al navegador.
+Motor de plantillas que permite mezclar HTML con datos del servidor usando etiquetas especiales (`<%= %>`— ejecuta JavaScript Y muestra el resultado en pantalla, `<% %>`-ejecuta JavaScript SIN mostrar nada). El servidor procesa el archivo EJS, inserta los datos y envía HTML puro al navegador.
 
 ### Fetch API
 Función nativa del navegador que permite enviar solicitudes HTTP en segundo plano sin recargar la página. Se usa para las votaciones en tiempo real.
