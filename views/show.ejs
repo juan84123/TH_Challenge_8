@@ -1,80 +1,103 @@
-<a href="/" class="btn btn-secondary" style="display: inline-block; margin-bottom: 16px;">← Volver</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- título dinámico con el nombre del tema -->
+  <title><%= topic.title %></title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    nav { display: flex; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #ddd; }
+    nav a { text-decoration: none; color: #333; font-weight: bold; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .btn-danger { background: #cc0000; color: white; }
+    .btn-vote { background: #28a745; color: white; }
+    .btn-secondary { background: #6c757d; color: white; text-decoration: none; display: inline-block; }
+    input { width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    label { display: block; margin-bottom: 4px; font-weight: bold; }
+  </style>
+</head>
+<body>
 
-<div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
-  
-  <h1 style="margin: 0 0 8px;"><%= topic.title %></h1>
-  <p style="color: #666; margin: 0 0 16px;"><%= topic.description %></p>
+  <!-- barra de navegación -->
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/topics/new">+ Nuevo Tema</a>
+  </nav>
 
-  <div style="display: flex; align-items: center; gap: 12px;">
-    
-    <button 
-      class="btn btn-vote vote-btn" 
-      data-id="<%= topic.id %>" 
-      data-type="topic">
-      👍 Votar
-    </button>
-
-    <span id="votes-topic-<%= topic.id %>">
-      <%= topic.votes %> votos
-    </span>
-
-    <a href="/topics/<%= topic.id %>/edit" class="btn btn-secondary">Editar</a>
-
-    <form action="/topics/<%= topic.id %>?_method=DELETE" method="POST" style="margin: 0;">
-      <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
-
-  </div>
-</div>
-
-<h2>Enlaces</h2>
-
-<% if (topic.links.length === 0) { %>
-  <p style="color: #666;">No hay enlaces todavía. Agregá el primero abajo.</p>
-<% } %>
-
-<% topic.links.forEach(link => { %>
-  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
-    
-    <a href="<%= link.url %>" target="_blank" style="font-weight: bold; color: #0066cc;">
-      <%= link.description %>
-    </a>
-    <p style="color: #888; font-size: 13px; margin: 4px 0 12px;"><%= link.url %></p>
+  <!-- tarjeta con la información del tema -->
+  <div class="card">
+    <h1><%= topic.title %></h1>
+    <p style="color: #666;"><%= topic.description %></p>
 
     <div style="display: flex; align-items: center; gap: 12px;">
-      
-      <button 
-        class="btn btn-vote vote-btn" 
-        data-id="<%= topic.id %>" 
-        data-link-id="<%= link.id %>" 
-        data-type="link">
-        👍 Votar
-      </button>
+      <!-- botón de votar el tema — data-type="topic" para que main.js sepa que es un tema -->
+      <button class="btn btn-vote vote-btn" data-id="<%= topic.id %>" data-type="topic">👍 Votar</button>
 
-      <span id="votes-link-<%= link.id %>">
-        <%= link.votes %> votos
-      </span>
+      <!-- contador de votos del tema — main.js lo actualiza en tiempo real -->
+      <span id="votes-topic-<%= topic.id %>"><%= topic.votes %> votos</span>
 
-      <form action="/topics/<%= topic.id %>/links/<%= link.id %>?_method=DELETE" method="POST" style="margin: 0;">
+      <!-- link al formulario de edición -->
+      <a href="/topics/<%= topic.id %>/edit" class="btn btn-secondary">Editar</a>
+
+      <!-- formulario de eliminar — usa POST porque HTML no soporta DELETE -->
+      <form action="/topics/<%= topic.id %>/delete" method="POST" style="margin:0;">
         <button type="submit" class="btn btn-danger">Eliminar</button>
       </form>
-
     </div>
   </div>
-<% }) %>
 
-<h2 style="margin-top: 24px;">Agregar enlace</h2>
+  <h2>Enlaces</h2>
 
-<div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px;">
-  <form action="/topics/<%= topic.id %>/links" method="POST">
-    
-    <label>URL</label>
-    <input type="url" name="url" placeholder="https://ejemplo.com" required>
+  <!-- mensaje si el tema no tiene enlaces todavía -->
+  <% if (topic.links.length === 0) { %>
+    <p style="color: #666;">No hay enlaces todavía. Agregá el primero abajo.</p>
+  <% } %>
 
-    <label>Descripción</label>
-    <input type="text" name="description" placeholder="¿De qué trata este enlace?" required>
+  <!-- iteramos sobre los enlaces del tema -->
+  <% topic.links.forEach(link => { %>
+    <div class="card">
 
-    <button type="submit" class="btn btn-primary">Agregar enlace</button>
+      <!-- link al recurso externo — se abre en pestaña nueva -->
+      <a href="<%= link.url %>" target="_blank" style="font-weight: bold; color: #0066cc;">
+        <%= link.description %>
+      </a>
 
-  </form>
-</div>
+      <!-- muestra la URL del enlace -->
+      <p style="color: #888; font-size: 13px; margin: 4px 0 12px;"><%= link.url %></p>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <!-- botón de votar el enlace — data-type="link" y data-link-id para que main.js sepa qué votar -->
+        <button class="btn btn-vote vote-btn" data-id="<%= topic.id %>" data-link-id="<%= link.id %>" data-type="link">👍 Votar</button>
+
+        <!-- contador de votos del enlace — main.js lo actualiza en tiempo real -->
+        <span id="votes-link-<%= link.id %>"><%= link.votes %> votos</span>
+      </div>
+
+    </div>
+  <% }) %>
+
+  <h2>Agregar enlace</h2>
+
+  <!-- formulario para agregar un enlace nuevo al tema -->
+  <div class="card">
+    <form action="/topics/<%= topic.id %>/links" method="POST">
+
+      <label>URL</label>
+      <!-- el atributo name="url" es lo que Express lee en req.body.url -->
+      <input type="url" name="url" placeholder="https://ejemplo.com" required>
+
+      <label>Descripción</label>
+      <!-- el atributo name="description" es lo que Express lee en req.body.description -->
+      <input type="text" name="description" placeholder="¿De qué trata este enlace?" required>
+
+      <button type="submit" class="btn btn-vote">Agregar enlace</button>
+
+    </form>
+  </div>
+
+  <!-- cargamos main.js al final para que el HTML ya esté listo cuando se ejecute -->
+  <script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,18 +1,50 @@
-<h1>Nuevo tema</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuevo Tema</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    nav { display: flex; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #ddd; }
+    nav a { text-decoration: none; color: #333; font-weight: bold; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; }
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #0066cc; color: white; }
+    .btn-secondary { background: #6c757d; color: white; text-decoration: none; display: inline-block; }
+    input, textarea { width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    label { display: block; margin-bottom: 4px; font-weight: bold; }
+  </style>
+</head>
+<body>
 
-<div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px;">
-  <form action="/topics" method="POST">
+  <!-- barra de navegación -->
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/topics/new">+ Nuevo Tema</a>
+  </nav>
 
-    <label>Título</label>
-    <input type="text" name="title" placeholder="Ej: Cómo programar como un ninja" required>
+  <h1>Nuevo Tema</h1>
 
-    <label>Descripción</label>
-    <textarea name="description" rows="4" placeholder="¿De qué trata este tema?" required></textarea>
+  <div class="card">
+    <!-- formulario de creación — envía POST a /topics con título y descripción -->
+    <form action="/topics" method="POST">
 
-    <div style="display: flex; gap: 12px; margin-top: 8px;">
-      <button type="submit" class="btn btn-primary">Crear tema</button>
-      <a href="/" class="btn btn-secondary">Cancelar</a>
-    </div>
+      <label>Título</label>
+      <!-- el atributo name="title" es lo que Express lee en req.body.title -->
+      <input type="text" name="title" placeholder="Ej: Cómo programar como un ninja" required>
 
-  </form>
-</div>
+      <label>Descripción</label>
+      <!-- el atributo name="description" es lo que Express lee en req.body.description -->
+      <textarea name="description" rows="4" placeholder="¿De qué trata este tema?" required></textarea>
+
+      <div style="display: flex; gap: 12px;">
+        <button type="submit" class="btn btn-primary">Crear tema</button>
+        <!-- cancela y vuelve al inicio sin crear nada -->
+        <a href="/" class="btn btn-secondary">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+
+</body>
+</html>

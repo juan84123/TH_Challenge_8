@@ -1,18 +1,50 @@
-<h1>Editar tema</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Tema</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    nav { display: flex; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #ddd; }
+    nav a { text-decoration: none; color: #333; font-weight: bold; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; }
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #0066cc; color: white; }
+    .btn-secondary { background: #6c757d; color: white; text-decoration: none; display: inline-block; }
+    input, textarea { width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+    label { display: block; margin-bottom: 4px; font-weight: bold; }
+  </style>
+</head>
+<body>
 
-<div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px;">
-  <form action="/topics/<%= topic.id %>?_method=PUT" method="POST">
+  <!-- barra de navegación -->
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/topics/new">+ Nuevo Tema</a>
+  </nav>
 
-    <label>Título</label>
-    <input type="text" name="title" value="<%= topic.title %>" required>
+  <h1>Editar Tema</h1>
 
-    <label>Descripción</label>
-    <textarea name="description" rows="4" required><%= topic.description %></textarea>
+  <div class="card">
+    <!-- formulario de edición — envía POST a /topics/:id/update con los nuevos datos -->
+    <form action="/topics/<%= topic.id %>/update" method="POST">
 
-    <div style="display: flex; gap: 12px; margin-top: 8px;">
-      <button type="submit" class="btn btn-primary">Guardar cambios</button>
-      <a href="/" class="btn btn-secondary">Cancelar</a>
-    </div>
+      <label>Título</label>
+      <!-- pre-rellena el input con el título actual del tema -->
+      <input type="text" name="title" value="<%= topic.title %>" required>
 
-  </form>
-</div>
+      <label>Descripción</label>
+      <!-- pre-rellena el textarea con la descripción actual del tema -->
+      <textarea name="description" rows="4" required><%= topic.description %></textarea>
+
+      <div style="display: flex; gap: 12px;">
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <!-- cancela y vuelve al inicio sin guardar -->
+        <a href="/" class="btn btn-secondary">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+
+</body>
+</html>

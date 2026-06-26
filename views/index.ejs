@@ -1,39 +1,71 @@
-<h1>Temas de aprendizaje</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Learn It, Love It</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    nav { display: flex; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #ddd; }
+    nav a { text-decoration: none; color: #333; font-weight: bold; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #0066cc; color: white; }
+    .btn-danger { background: #cc0000; color: white; }
+    .btn-vote { background: #28a745; color: white; }
+    .btn-secondary { background: #6c757d; color: white; text-decoration: none; display: inline-block; }
+  </style>
+</head>
+<body>
 
-<% if (topics.length === 0) { %>
-  <p>No hay temas todavía. <a href="/topics/new">Creá el primero</a>.</p>
-<% } %>
+  <!-- barra de navegación -->
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/topics/new">+ Nuevo Tema</a>
+  </nav>
 
-<% topics.forEach(topic => { %>
-  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
-    
-    <h2 style="margin: 0 0 8px;">
-      <a href="/topics/<%= topic.id %>" style="text-decoration: none; color: #333;">
-        <%= topic.title %>
-      </a>
-    </h2>
+  <h1>Temas de aprendizaje</h1>
 
-    <p style="color: #666; margin: 0 0 12px;"><%= topic.description %></p>
+  <!-- si no hay temas muestra un mensaje con link para crear el primero -->
+  <% if (topics.length === 0) { %>
+    <p>No hay temas todavía. <a href="/topics/new">Creá el primero</a>.</p>
+  <% } %>
 
-    <div style="display: flex; align-items: center; gap: 12px;">
-      
-      <button 
-        class="btn btn-vote vote-btn" 
-        data-id="<%= topic.id %>" 
-        data-type="topic">
-        👍 Votar
-      </button>
+  <!-- iteramos sobre el array de temas que viene del controlador -->
+  <% topics.forEach(topic => { %>
+    <div class="card">
 
-      <span id="votes-topic-<%= topic.id %>">
-        <%= topic.votes %> votos
-      </span>
+      <!-- título del tema con link al detalle -->
+      <h2>
+        <a href="/topics/<%= topic.id %>" style="text-decoration: none; color: #333;">
+          <%= topic.title %>
+        </a>
+      </h2>
 
-      <a href="/topics/<%= topic.id %>/edit" class="btn btn-secondary">Editar</a>
+      <!-- descripción del tema -->
+      <p style="color: #666;"><%= topic.description %></p>
 
-      <form action="/topics/<%= topic.id %>?_method=DELETE" method="POST" style="margin: 0;">
-        <button type="submit" class="btn btn-danger">Eliminar</button>
-      </form>
+      <div style="display: flex; align-items: center; gap: 12px;">
 
+        <!-- botón de votar — data-id y data-type los lee main.js para saber qué votar -->
+        <button class="btn btn-vote vote-btn" data-id="<%= topic.id %>" data-type="topic">👍 Votar</button>
+
+        <!-- contador de votos — main.js lo actualiza en tiempo real con su id único -->
+        <span id="votes-topic-<%= topic.id %>"><%= topic.votes %> votos</span>
+
+        <!-- link al formulario de edición -->
+        <a href="/topics/<%= topic.id %>/edit" class="btn btn-secondary">Editar</a>
+
+        <!-- formulario de eliminar — usa POST porque HTML no soporta DELETE -->
+        <form action="/topics/<%= topic.id %>/delete" method="POST" style="margin:0;">
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+
+      </div>
     </div>
-  </div>
-<% }) %>
+  <% }) %>
+
+  <!-- cargamos main.js al final para que el HTML ya esté listo cuando se ejecute -->
+  <script src="/js/main.js"></script>
+
+</body>
+</html>

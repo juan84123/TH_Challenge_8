@@ -1,9 +1,93 @@
 [
   {
-    "id": 1781926659207,
-    "title": "sdfsdf",
-    "description": "sfsdfsf",
-    "votes": 6,
+    "id": 1,
+    "title": "Cómo programar como un ninja",
+    "description": "Recursos para mejorar tus habilidades de programación al máximo nivel.",
+    "votes": 60,
+    "links": [
+      {
+        "id": 1,
+        "url": "https://developer.mozilla.org",
+        "description": "MDN Web Docs - la biblia del desarrollo web",
+        "votes": 14
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Dominar el arte de preparar café",
+    "description": "Todo lo que necesitás saber para preparar el café perfecto.",
+    "votes": 30,
+    "links": [
+      {
+        "id": 2,
+        "url": "https://www.youtube.com/watch?v=ZgIVfGkJkMg",
+        "description": "Tutorial de café pour over paso a paso",
+        "votes": 5
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Aprender inglés en 6 meses",
+    "description": "Métodos y recursos para aprender inglés de forma rápida y efectiva.",
+    "votes": 60,
     "links": []
+  },
+  {
+    "id": 4,
+    "title": "Fotografía para principiantes",
+    "description": "Desde cero hasta sacar fotos profesionales con cualquier cámara.sdfsdfsdf",
+    "votes": 61,
+    "links": [
+      {
+        "id": 3,
+        "url": "https://www.photographytalk.com",
+        "description": "Guía completa de fotografía para principiantes",
+        "votes": 6
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Cocina italiana desde cero",
+    "description": "Aprende a cocinar los platos más icónicos de la cocina italiana.",
+    "votes": 5,
+    "links": []
+  },
+  {
+    "id": 6,
+    "title": "Meditación y mindfulness",
+    "description": "Técnicas para reducir el estrés y mejorar tu bienestar mental.",
+    "votes": 4,
+    "links": [
+      {
+        "id": 4,
+        "url": "https://www.headspace.com",
+        "description": "App de meditación guiada",
+        "votes": 2
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Guitarra para principiantes",
+    "description": "Todo lo que necesitás saber para empezar a tocar la guitarra.",
+    "votes": 3,
+    "links": []
+  },
+  {
+    "id": 8,
+    "title": "Finanzas personales e inversión",
+    "description": "Cómo administrar tu dinero y empezar a invertir desde cero.",
+    "votes": 2,
+    "links": [
+      {
+        "id": 5,
+        "url": "https://www.investopedia.com",
+        "description": "Guía completa de inversión para principiantes",
+        "votes": 1
+      }
+    ]
   }
 ]
