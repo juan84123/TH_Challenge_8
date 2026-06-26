@@ -1,11 +1,8 @@
 # Learn It, Love It Inc. 📚
-
 Plataforma educativa donde los usuarios pueden agregar, actualizar y eliminar temas de aprendizaje, agregar enlaces útiles dentro de cada tema, y votar por los más útiles. El contenido se reordena dinámicamente según los votos.
-
 ---
 
 ## Tecnologías y conceptos
-
 ### Node.js
 Entorno de ejecución que permite usar JavaScript fuera del navegador — en el servidor. Sin Node.js, JavaScript solo puede correr en el navegador.
 
@@ -27,9 +24,8 @@ Patrón de diseño que separa el código en tres capas:
 ---
 
 ## Archivos del proyecto
-
 | Archivo | Descripción |
-|---|---|
+
 | `app.js` | Punto de entrada — configura Express y define los endpoints |
 | `controllers/topicController.js` | Recibe las solicitudes HTTP y coordina modelo y vistas |
 | `models/topicModel.js` | Lee y escribe el archivo JSON con los datos |
@@ -41,10 +37,12 @@ Patrón de diseño que separa el código en tres capas:
 | `public/js/main.js` | JavaScript del navegador — maneja votaciones en tiempo real |
 | `package.json` | Lista las dependencias del proyecto (como requirements.txt en Python) |
 | `package-lock.json` | Registro exacto de las versiones instaladas — no se modifica manualmente |
-
+| `node_modules/` | Carpeta donde npm descarga los paquetes instalados. Se genera con `npm install` 
+|                    nunca se sube a GitHub |
 ---
 
 ## Instalación
+npm lee el `package.json` y descarga todos los paquetes necesarios automáticamente.
 
 ```bash
 git clone https://github.com/juan84123/TH_Challenge_8.git
@@ -64,6 +62,24 @@ Abrí el navegador en `http://localhost:3000`
 | GET | `/` | Lista todos los temas ordenados por votos |
 | GET | `/topics/new` | Formulario para crear tema |
 | GET | `/topics/json` | Devuelve temas en JSON para el reordenamiento en tiempo real |
+| POST | `/topics` | Crea un tema nuevo |
+| GET | `/topics/:id` | Detalle de un tema con sus enlaces |
+| GET | `/topics/:id/edit` | Formulario para editar tema |
+| POST | `/topics/:id/update` | Actualiza un tema |
+| POST | `/topics/:id/delete` | Elimina un tema |
+| POST | `/topics/:id/vote` | Incrementa votos de un tema |
+| POST | `/topics/:id/links` | Agrega un enlace a un tema |
+| POST | `/topics/:id/links/:linkId/vote` | Incrementa votos de un enlace |
+
+---
+
+## Endpoints
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/` | Lista todos los temas ordenados por votos |
+| GET | `/topics/new` | Formulario para crear tema |
+| GET | `/topics/json` | Devuelve temas en JSON para reordenamiento en tiempo real |
 | POST | `/topics` | Crea un tema nuevo |
 | GET | `/topics/:id` | Detalle de un tema con sus enlaces |
 | GET | `/topics/:id/edit` | Formulario para editar tema |

@@ -52,12 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
                   const tarjeta = document.querySelector('.card [data-id="' + id + '"]').closest('.card')
                   tarjeta.style.order = i
                 }
-
               })
           }
-
         })
     })
   })
-
 })

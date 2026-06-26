@@ -29,7 +29,9 @@ app.get('/topics/:id/edit', topicController.editForm)                  // formul
 app.post('/topics/:id/update', topicController.update)                 // actualiza un tema
 app.post('/topics/:id/delete', topicController.remove)                 // elimina un tema
 app.post('/topics/:id/vote', topicController.vote)                     // vota por un tema
+app.post('/topics/:id/links', topicController.addLink)  // agrega un enlace a un tema
 app.post('/topics/:id/links/:linkId/vote', topicController.voteLink)   // vota por un enlace
+
 
 // Arranca el servidor en el puerto 3000
 app.listen(PORT, () => {

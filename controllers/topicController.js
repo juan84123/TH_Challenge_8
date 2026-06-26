@@ -60,5 +60,11 @@ function indexJson(req, res) {
   res.json(topics)
 }
 
+// recibe los datos del formulario, agrega el enlace al tema y redirige al detalle
+function addLink(req, res) {
+  topicModel.addLink(req.params.id, req.body)
+  res.redirect('/topics/' + req.params.id)
+}
+
 // exportamos todas las funciones para que app.js pueda usarlas
-module.exports = { index, newForm, create, show, editForm, update, remove, vote, voteLink, indexJson }
+module.exports = { index, newForm, create, show, editForm, update, remove, vote, voteLink, indexJson, addLink }

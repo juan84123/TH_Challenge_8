@@ -81,5 +81,20 @@ function voteLink(topicId, linkId) {
   return topics[topicIndex].links[linkIndex]
 }
 
+// agrega un enlace nuevo dentro de un tema y guarda en el JSON
+function addLink(id, linkData) {
+  const topics = readData()
+  const index = topics.findIndex(t => t.id === parseInt(id))
+  const newLink = {
+    id: Date.now(),
+    url: linkData.url,
+    description: linkData.description,
+    votes: 0
+  }
+  topics[index].links.push(newLink)
+  writeData(topics)
+  return newLink
+}
+
 // exportamos todas las funciones para que el controlador pueda usarlas
-module.exports = { getAll, getById, create, update, remove, vote, voteLink }
+module.exports = { getAll, getById, create, update, remove, vote, voteLink, addLink }
