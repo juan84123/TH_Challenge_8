@@ -17,9 +17,9 @@ Función nativa del navegador que permite enviar solicitudes HTTP en segundo pla
 
 ### Arquitectura MVC
 Patrón de diseño que separa el código en tres capas:
-- **Model** — maneja los datos (`topicModel.js`)
-- **View** — muestra la información (`views/*.ejs`)
-- **Controller** — coordina modelo y vistas (`topicController.js`)
+-*Model*(`topicModel.js`) —  solo sabe de datos. Lee y escribe el JSON. No sabe que existe HTTP ni HTML.
+-*View*(`views/*.ejs`) — solo muestra información. Recibe datos del controlador y los convierte en HTML. No sabe de dónde vienen los datos.
+-*Controller*(`topicController.js`) — coordina todo. Recibe la solicitud HTTP, le pide datos al modelo, y le manda esos datos a la vista.
 
 ---
 
